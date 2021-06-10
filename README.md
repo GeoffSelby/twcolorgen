@@ -43,14 +43,7 @@ npm install -g twcolorgen
 <!-- usage -->
 
 ```sh-session
-$ npm install -g twcolorgen
-$ twcolorgen COMMAND
-running command...
-$ twcolorgen (-v|--version|version)
-twcolorgen/1.0.0 darwin-x64 node-v12.19.0
-$ twcolorgen --help [COMMAND]
-USAGE
-  $ twcolorgen COMMAND
+npm install -g twcolorgen
 ...
 ```
 
