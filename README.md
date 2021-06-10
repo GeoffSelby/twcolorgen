@@ -2,9 +2,9 @@
 
 Generate Tailwind Css color shades in the blink of an eye right in your terminal.
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/GeoffSelby/twcolorgen/tests/main?logo=github&style=for-the-badge)](https://github.com/GeoffSelby/twcolorgen)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/GeoffSelby/twcolorgen/Tests%20CI/main?style=for-the-badge)](https://github.com/GeoffSelby/twcolorgen)
 [![Version](https://img.shields.io/npm/v/twcolorgen.svg?style=for-the-badge)](https://npmjs.org/package/twcolorgen)
-[![License](https://img.shields.io/npm/l/twcolorgen.svg?style=for-the-badge)](https://github.com/GeoffSelby/twcolorgen/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/twcolorgen?style=for-the-badge)](https://github.com/GeoffSelby/twcolorgen/blob/master/package.json)
 
 <!-- toc -->
 
