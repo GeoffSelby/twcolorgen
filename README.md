@@ -42,9 +42,8 @@ npm install -g twcolorgen
 
 <!-- usage -->
 
-```sh-session
+```bash
 npm install -g twcolorgen
-...
 ```
 
 <!-- usagestop -->
