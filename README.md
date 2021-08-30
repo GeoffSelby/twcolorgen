@@ -43,7 +43,7 @@ npm install -g twcolorgen
 <!-- usage -->
 
 ```bash
-npm install -g twcolorgen
+twcolorgen #3b82f6 --name blue
 ```
 
 <!-- usagestop -->
