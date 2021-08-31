@@ -43,7 +43,14 @@ npm install -g twcolorgen
 <!-- usage -->
 
 ```bash
-twcolorgen #3b82f6 --name blue
+# Using hex color
+twcolorgen 3b82f6 --name blue
+
+# Using RGB color
+twcolorgen rgb(59, 130, 246) --name blue
+
+# Using HSL color
+twcolorgen hsl(217, 91%, 60%) --name blue
 ```
 
 <!-- usagestop -->
