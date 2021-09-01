@@ -7,12 +7,13 @@ Generate Tailwind Css color shades in the blink of an eye right in your terminal
 [![License](https://img.shields.io/npm/l/twcolorgen?style=for-the-badge)](https://github.com/GeoffSelby/twcolorgen/blob/master/package.json)
 
 <!-- toc -->
-* [Tailwind Color Shades Generator](#tailwind-color-shades-generator)
-* [Features](#features)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Options](#options)
-* [License](#license)
+
+- [Tailwind Color Shades Generator](#tailwind-color-shades-generator)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Options](#options)
+- [License](#license)
 <!-- tocstop -->
 
 # Features
@@ -40,17 +41,21 @@ npm install -g twcolorgen
 # Usage
 
 <!-- usage -->
-```sh-session
-$ npm install -g twcolorgen
-$ twcolorgen COMMAND
-running command...
-$ twcolorgen (-v|--version|version)
-twcolorgen/1.0.1 darwin-x64 node-v14.17.5
-$ twcolorgen --help [COMMAND]
-USAGE
-  $ twcolorgen COMMAND
-...
+
+```bash
+# Using HEX format
+twcolorgen 3b82f6 --name blue
+
+# Using HSL format
+twcolorgen "hsl(217, 91%, 60%)" --name blue
+
+# Using RGB format
+twcolorgen "rgb(59, 130, 246)" --name blue
+
+# Generating specific levels
+twcolorgen 3b82f6 --name blue --levels 200 300 400 700 800
 ```
+
 <!-- usagestop -->
 
 # Options
