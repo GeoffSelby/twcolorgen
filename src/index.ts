@@ -13,6 +13,12 @@ type Palette = {
   };
 };
 
+type Rgb = {
+  r: number;
+  g: number;
+  b: number;
+};
+
 class Twcolorgen extends Command {
   static description = 'Generate Tailwind Css color shades'
 
@@ -20,6 +26,7 @@ class Twcolorgen extends Command {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
     name: flags.string({char: 'N', description: 'name of color'}),
+    format: flags.string({char: 'f', description: 'color format returned'}),
     levels: flags.string({
       char: 'L',
       description: 'the levels to generate shades for',
@@ -43,7 +50,8 @@ class Twcolorgen extends Command {
 
   async run() {
     const {args, flags} = this.parse(Twcolorgen)
-    let color = `#${args.color}`.toLowerCase().replace('##', '#')
+    let color: string = args.color
+    let baseColor: string
     let format: string
 
     switch (args.color.substring(0, 3)) {
@@ -57,16 +65,73 @@ class Twcolorgen extends Command {
       break
     default:
       format = 'hex'
+      color = `#${args.color}`.toLowerCase().replace('##', '#')
     }
 
-    const colors = new Colors(color, format)
+    baseColor = color
+
+    this.log(baseColor)
+
+    const outputFormat = flags.format ? flags.format : format
+
+    // Check if format flag is valid if provided
+    if (outputFormat && !['hex', 'hsl', 'rgb'].includes(outputFormat)) {
+      this.error(`Invalid format ${outputFormat}`)
+    }
+
+    const colors = new Colors(color, format, outputFormat)
+
+    // reformat base color to match output format
+    if (format !== outputFormat) {
+      let rgb: Rgb | null = null
+      if (format === 'hex') {
+        switch (outputFormat) {
+        case 'rgb':
+          rgb = colors.hexToRgb()
+          baseColor = colors.formatOutput([rgb!.r, rgb!.g, rgb!.b])
+          break
+        case 'hsl':
+          rgb = colors.hexToRgb()
+          baseColor = colors.formatOutput([rgb!.r, rgb!.g, rgb!.b])
+          break
+        case 'hex':
+          break
+        }
+      } else if (format === 'rgb') {
+        switch (outputFormat) {
+        case 'hex':
+          rgb = colors.parseRgbString()
+          baseColor = colors.formatOutput([rgb!.r, rgb!.g, rgb!.b])
+          break
+        case 'hsl':
+          rgb = colors.parseRgbString()
+          baseColor = colors.formatOutput([rgb!.r, rgb!.g, rgb!.b])
+          break
+        case 'rgb':
+          break
+        }
+      } else if (format === 'hsl') {
+        switch (outputFormat) {
+        case 'hex':
+          rgb = colors.hslToRgb(color)
+          baseColor = colors.formatOutput([rgb!.r, rgb!.g, rgb!.b])
+          break
+        case 'rgb':
+          rgb = colors.hslToRgb(color)
+          baseColor = colors.formatOutput([rgb!.r, rgb!.g, rgb!.b])
+          break
+        case 'hsl':
+          break
+        }
+      }
+    }
 
     const name = flags.name ? camelCase(flags.name) : camelCase(colors.getColorName())
 
     const response: Palette = {
       colors: {
         [name]: {
-          500: color,
+          500: baseColor,
         },
       },
     }

@@ -52,6 +52,9 @@ twcolorgen "hsl(217, 91%, 60%)" --name blue
 # Using RGB format
 twcolorgen "rgb(59, 130, 246)" --name blue
 
+# Outputting a different format (hex, rgb, hsl)
+twcolorgen 3b82f6 --name blue --format rgb
+
 # Generating specific levels
 twcolorgen 3b82f6 --name blue --levels 200 300 400 700 800
 ```
@@ -69,6 +72,7 @@ The `twcolorgen` command accepts multiple flags. All of the flags are optional.
 | `--version` | `boolean` | The CLI version                   |
 | `--help`    | `boolean` | Shows CLI help page               |
 | `--name`    | `string`  | The name to use for the color     |
+| `--format`  | `string`  | The outputted color format        |
 | `--levels`  | `string`  | The levels to generate shades for |
 | `--copy`    | `boolean` | Copy shade object to clipboard    |
 

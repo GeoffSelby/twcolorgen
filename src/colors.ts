@@ -12,26 +12,30 @@ class Colors {
 
   private format: string
 
+  private outputFormat: string
+
   constructor(
     color: string,
-    format: string
+    format: string,
+    outputFormat: string,
   ) {
     this.color = color
     this.format = format
+    this.outputFormat = outputFormat
   }
 
   colorize(color: string) {
-    if (this.format === 'hex') {
+    if (this.outputFormat === 'hex') {
       return chalk.bgHex(color)('       ')
     }
 
-    if (this.format === 'rgb') {
+    if (this.outputFormat === 'rgb') {
       const [r, g, b] = color.match(/\d+/g)!.map(Number)
       return chalk.bgRgb(r, g, b)('       ')
     }
 
-    if (this.format === 'hsl') {
-      const rgb = this.hslToRgb()
+    if (this.outputFormat === 'hsl') {
+      const rgb = this.hslToRgb(color)
 
       return chalk.bgRgb(rgb.r, rgb.g, rgb.b)('       ')
     }
@@ -45,7 +49,7 @@ class Colors {
       rgb = this.hexToRgb()
       break
     case 'hsl':
-      rgb = this.hslToRgb()
+      rgb = this.hslToRgb(this.color)
       break
     case 'rgb':
       rgb = this.parseRgbString()
@@ -71,7 +75,7 @@ class Colors {
       rgb = this.hexToRgb()
       break
     case 'hsl':
-      rgb = this.hslToRgb()
+      rgb = this.hslToRgb(this.color)
       break
     case 'rgb':
       rgb = this.parseRgbString()
@@ -120,20 +124,20 @@ class Colors {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`
   }
 
-  hslToRgb(): Rgb {
-    const sep = this.color.indexOf(',') > -1 ? ',' : ' '
-    const hsl: Array<any> = this.color.substr(4).split(')')[0].split(sep)
+  hslToRgb(color: string): Rgb {
+    const sep = color.indexOf(',') > -1 ? ',' : ' '
+    const hsl: Array<any> = color.substring(4).split(')')[0].split(sep)
 
     let h = hsl[0]
-    const s = hsl[1].substr(0, hsl[1].length - 1) / 100
-    const l = hsl[2].substr(0, hsl[2].length - 1) / 100
+    const s = hsl[1].substring(0, hsl[1].length - 1) / 100
+    const l = hsl[2].substring(0, hsl[2].length - 1) / 100
 
     if (h.indexOf('deg') > -1) {
-      h = h.substr(0, h.length - 3)
+      h = h.substring(0, h.length - 3)
     } else if (h.indexOf('rad') > -1) {
-      h = Math.round(h.substr(0, h.length - 3) * (180 / Math.PI))
+      h = Math.round(h.substring(0, h.length - 3) * (180 / Math.PI))
     } else if (h.indexOf('turn') > -1) {
-      h = Math.round(h.substr(0, h.length - 4) * 360)
+      h = Math.round(h.substring(0, h.length - 4) * 360)
     }
 
     if (h >= 360) {
@@ -224,7 +228,7 @@ class Colors {
     const [r, g, b] = rgb
     let output = ''
 
-    switch (this.format) {
+    switch (this.outputFormat) {
     case 'hex':
       output = this.rgbToHex(r, g, b)
       break
