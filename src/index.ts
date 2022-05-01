@@ -48,6 +48,7 @@ class Twcolorgen extends Command {
 
   static args = [{name: 'color'}]
 
+  // eslint-disable-next-line complexity
   async run() {
     const {args, flags} = this.parse(Twcolorgen)
     let color: string = args.color
@@ -69,8 +70,6 @@ class Twcolorgen extends Command {
     }
 
     baseColor = color
-
-    this.log(baseColor)
 
     const outputFormat = flags.format ? flags.format : format
 
